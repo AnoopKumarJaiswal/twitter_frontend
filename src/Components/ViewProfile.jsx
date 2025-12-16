@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useUtilContext } from "../utils/UtilContext";
 import { useDispatch, useSelector } from "react-redux";
 import { followUser, unfollowUser } from "../utils/userSlice";
 import Post from "./Post";
 import DOMAIN from "../constants";
+import Loader from "./Loder";
 
 
 const formatIST = (isoString) => {
@@ -26,6 +27,7 @@ const ViewProfile = () => {
   const { id } = useParams();
   const [user, setUser] = useState({});
   const [showError, setShowError] = useState(false);
+  const nav = useNavigate()
 
   const loggedInUser = useSelector((store) => store.user.data) || {};
   const {
@@ -89,24 +91,30 @@ const ViewProfile = () => {
 
               <div className="flex gap-4 mt-4">
                 {loggedInUserKaFollowing.includes(id) ? (
-                  <button
-                    onClick={() => {
-                      axios
-                        .patch(
-                          DOMAIN +
-                            `/profile/unfollow/${id}`,
-                          null,
-                          { withCredentials: true }
-                        )
-                        .then(() => {
-                          followers.pop()
-                          dispatch(unfollowUser(id));
-                        });
-                    }}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm"
-                  >
-                    Unfollow
-                  </button>
+                  <div className="flex gap-9">
+                    <button
+                      onClick={() => {
+                        axios
+                          .patch(
+                            DOMAIN +
+                              `/profile/unfollow/${id}`,
+                            null,
+                            { withCredentials: true }
+                          )
+                          .then(() => {
+                            followers.pop()
+                            dispatch(unfollowUser(id));
+                          });
+                      }}
+                      className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm"
+                    >
+                      Unfollow
+                    </button>
+
+                    <button onClick={() =>{
+                      nav(`/chat/${id}`)
+                    }} className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm">Message</button>
+                  </div>
                 ) : (
                   <button
                     onClick={() => {
@@ -154,7 +162,7 @@ const ViewProfile = () => {
       ) : showError ? (
         <h1>ERROR</h1>
       ) : (
-        <h1>Loading...</h1>
+        <Loader />
       )}
     </div>
   );

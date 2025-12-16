@@ -19,7 +19,7 @@ const Profile = () => {
     _id = "",
   } = userData;
 
-  console.log(userData.post)
+  // console.log(userData.post)
 
   const nav = useNavigate();
 

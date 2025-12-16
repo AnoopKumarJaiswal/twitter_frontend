@@ -12,6 +12,7 @@ import Profile from './Components/Profile'
 import EditProfile from './Components/EditProfile'
 import NewPost from './Components/NewPost'
 import ViewProfile from './Components/ViewProfile'
+import Chat from './Components/Chat'
 
 
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
           <Route path='/profile/edit' element={<EditProfile  />} />
           <Route path='/post' element={<NewPost />} />
           <Route path='/profile/:id' element={<ViewProfile />} />
+          <Route path='/chat/:id' element={<Chat />} />
         </Route>
 
 

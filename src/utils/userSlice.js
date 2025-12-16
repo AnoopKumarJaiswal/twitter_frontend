@@ -1,16 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import DOMAIN from "../constants";
 
 
 export const fetchUserData = createAsyncThunk("fetchUser", async(_, thunk) => {
     try {
-        const res = await axios.get(import.meta.env.VITE_DOMAIN + "/get-user-data", { withCredentials : true})
+        const res = await axios.get(DOMAIN + "/get-user-data", { withCredentials : true})
         // console.log(res)
         return res.data.data
         
 
     } catch (error) {
-          console.log("Error");
+        //   console.log("Error");
           
         return thunk.rejectWithValue(error.response.data.error)
     }
@@ -74,7 +75,7 @@ const userSlice = createSlice({
             state.data = action.payload
         })
         .addCase(fetchUserData.rejected, (state, action) => {
-            console.log(action)
+            // console.log(action)
             state.loading = false
             state.error = action.payload
         })

@@ -89,7 +89,8 @@ const Post = ({
         { text },
         { withCredentials: true }
       )
-      .then(() => {
+      .then((res) => {
+        console.log(res)
         toast.success("Comment added");
         setText("");
       })

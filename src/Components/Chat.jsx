@@ -7,38 +7,20 @@ import DOMAIN from "../constants";
 import { useSelector } from "react-redux";
 
 
-
 const formatToIST12Hour = (createdAt) => {
   if (!createdAt) return "";
 
   const date = new Date(createdAt);
-  if (isNaN(date)) return "";
+  if (isNaN(date.getTime())) return "";
 
-  const now = new Date();
-
-  const isSameDay =
-    date.getDate() === now.getDate() &&
-    date.getMonth() === now.getMonth() &&
-    date.getFullYear() === now.getFullYear();
-
-  const time = date.toLocaleTimeString("en-IN", {
-    timeZone: "Asia/Kolkata",
+  return date.toLocaleTimeString("en-IN", {
     hour: "2-digit",
     minute: "2-digit",
     hour12: true,
   });
-
-  if (isSameDay) return time;
-
-  const day = date.toLocaleDateString("en-IN", {
-    timeZone: "Asia/Kolkata",
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
-
-  return `${day}, ${time}`;
 };
+
+
 
 
 const Chat = () => {
@@ -92,7 +74,8 @@ const Chat = () => {
        let temp = res.data.prevMsgs.map((item) =>{
         return {
           text : item.text,
-          sender : item.fromUserId == loggedUserId ? "me" : "you"
+          sender : item.fromUserId == loggedUserId ? "me" : "you",
+          createdAt : item.createdAt
         }
        })  
        
@@ -127,49 +110,58 @@ const Chat = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-6 text-gray-500 text-lg">
+        {/* <div className="flex items-center gap-6 text-gray-500 text-lg">
           <i className="fa-solid fa-phone cursor-pointer"></i>
           <i className="fa-solid fa-video cursor-pointer"></i>
           <i className="fa-solid fa-ellipsis-vertical cursor-pointer"></i>
-        </div>
+        </div> */}
       </div>}
 
       {/* ================= CHAT MESSAGES ================= */}
- <div className="flex-1 overflow-y-auto px-12 py-8 space-y-6">
+<div className="flex-1 overflow-y-auto px-12 py-8 space-y-6">
   {messages.map((msg, index) => (
     <div
       key={index}
       className={`flex max-w-4xl ${
         msg.sender === "me"
           ? "ml-auto justify-end"
-          : "items-start gap-4"
+          : "justify-start"
       }`}
     >
-      <div
-        className={`px-5 py-3 rounded-2xl shadow-sm ${
-          msg.sender === "me"
-            ? "bg-blue-600 text-white"
-            : "bg-white text-gray-800"
-        }`}
-      >
-        {/* Message text */}
-        <p className="text-[15px] leading-relaxed">{msg.text}</p>
+      {/* WRAPPER */}
+      <div className="relative">
 
-        {/* Time (using your function) */}
-        <p
-          className={`text-[11px] mt-1 text-right ${
+        {/* MESSAGE BUBBLE */}
+        <div
+          className={`px-5 py-3 rounded-2xl shadow-sm max-w-sm ${
             msg.sender === "me"
-              ? "text-blue-100"
-              : "text-gray-400"
+              ? "bg-blue-600 text-white"
+              : "bg-white text-gray-800"
           }`}
         >
-          {formatToIST12Hour(msg.createdAt)}
-        </p>
+          <p className="text-[15px] leading-relaxed">
+            {msg.text}
+          </p>
+        </div>
+
+        {/* TIME (SIDE ME) */}
+        {msg.createdAt && (
+          <span
+            className={`absolute text-[11px] whitespace-nowrap ${
+              msg.sender === "me"
+                ? "right-0 -bottom-5 text-gray-400"
+                : "left-0 -bottom-5 text-gray-400"
+            }`}
+          >
+            {formatToIST12Hour(msg.createdAt)}
+          </span>
+        )}
       </div>
     </div>
   ))}
   <div ref={bottomRef} />
 </div>
+
 
       {/* ================= INPUT AREA ================= */}
       <div className="bg-white px-8 py-4 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">

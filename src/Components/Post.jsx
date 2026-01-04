@@ -26,8 +26,8 @@ const Post = ({
   createdAt,
   caption,
   img,
-  likes = [],
-  comments = [],
+  likes ,
+  comments,
   _id,
   loggedInUserId,
   username,
@@ -40,7 +40,7 @@ const Post = ({
     : [];
 
   const safeComments = Array.isArray(comments) ? comments : [];
-
+  const [commentList, setCommentList] = useState(safeComments)
   const [likedByUser, setLikedByUser] = useState(safeLikes);
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState("");
@@ -48,7 +48,7 @@ const Post = ({
   useEffect(() => {
     document.body.style.overflow = showModal ? "hidden" : "auto";
     return () => (document.body.style.overflow = "auto");
-  }, [showModal]);
+  }, [showModal,]);
 
   const userHasLiked = likedByUser.includes(loggedInUserId);
 
@@ -90,7 +90,7 @@ const Post = ({
         { withCredentials: true }
       )
       .then((res) => {
-        console.log(res)
+        setCommentList(prev => [...prev , res.data.data.comment])
         toast.success("Comment added");
         setText("");
       })
@@ -133,7 +133,7 @@ const Post = ({
                 {/* COMMENTS */}
                 <div className="flex-1 flex flex-col">
                   <div className="flex-1 overflow-y-auto px-4 py-3 space-y-4 text-sm">
-                    {safeComments.map((item) => {
+                    {commentList.map((item) => {
                       if (!item || !item.author) return null;
 
                       return (
@@ -230,7 +230,7 @@ const Post = ({
             onClick={() => setShowModal(true)}
           >
             💬
-            <span>{safeComments.length}</span>
+            <span>{commentList.length}</span>
           </div>
         </div>
       </div>

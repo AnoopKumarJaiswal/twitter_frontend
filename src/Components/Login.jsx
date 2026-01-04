@@ -11,8 +11,8 @@ const Login = () => {
   const dispatch = useDispatch()
   const nav = useNavigate()
   const [formData, setFormData] = useState({
-    username: "anoop",
-    password: "Anoop123!",
+    username: "",
+    password: "",
   });
 
 

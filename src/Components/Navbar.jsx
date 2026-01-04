@@ -38,7 +38,6 @@ const Navbar = () => {
   return (
     <div className="z-50 h-[10vh] w-full px-8 py-4 bg-blue-600 text-white flex items-center justify-between shadow-md fixed top-0">
       
-      {/* Logo */}
       <h1 className="text-2xl font-bold tracking-wide">LOGO</h1>
 
       <div className='relative'>
@@ -72,7 +71,6 @@ const Navbar = () => {
                   className="flex items-center gap-3 px-3 py-2 cursor-pointer 
                             hover:bg-gray-100 transition rounded-lg"
                 >
-                  {/* Avatar */}
                   <img
                     src={
                       item.profilePicture ||
@@ -82,7 +80,6 @@ const Navbar = () => {
                     className="w-10 h-10 rounded-full object-cover"
                   />
 
-                  {/* Name + Username */}
                   <div className="flex flex-col">
                     <p className="font-medium text-gray-900 text-sm">
                       {item.firstName + " " + item.lastName}

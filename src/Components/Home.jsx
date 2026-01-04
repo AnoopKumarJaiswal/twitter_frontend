@@ -32,7 +32,7 @@ const Home = () => {
  else {
           setPosts((prev) => [...prev, ...res.data.data])
         }
-        setInitialRender(false) // 🔥 IMPORTANT
+        setInitialRender(false) 
       })
   }, [pageNum])
 
@@ -73,6 +73,7 @@ const Home = () => {
               _id={item._id}
               loggedInUserId={userData._id}
               username={item.author?.username}
+              likes={item.likes}
             />
           ))
         )}

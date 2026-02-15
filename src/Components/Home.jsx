@@ -13,7 +13,7 @@ const Home = () => {
   const loderRef = useRef()
   const [intialRender, setInitialRender] = useState(true)
   const [flag, setflag] = useState(false)
-  
+
   const userData = useSelector(store => store.user.data)
 
 
@@ -26,13 +26,13 @@ const Home = () => {
         { withCredentials: true }
       )
       .then((res) => {
-       if (posts.length + res.data.data.length >= res.data.totalPosts) {
-  setflag(true)
-}
- else {
+        if (posts.length + res.data.data.length >= res.data.totalPosts) {
+          setflag(true)
+        }
+        else {
           setPosts((prev) => [...prev, ...res.data.data])
         }
-        setInitialRender(false) 
+        setInitialRender(false)
       })
   }, [pageNum])
 
@@ -55,10 +55,16 @@ const Home = () => {
   }, [intialRender, flag])
 
   return (
-    <div className="w-full">
+    <div className="w-full max-w-2xl mx-auto pb-20">
       <div className="mx-auto">
         {posts.length == 0 ? (
-          <h1>No Posts Found</h1>
+          <div className="flex flex-col items-center justify-center min-h-[50vh] text-center animate-fade-in">
+            <div className="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center mb-6 animate-pulse">
+              <i className="fa-regular fa-folder-open text-3xl text-slate-500"></i>
+            </div>
+            <h1 className="text-2xl font-bold text-slate-200 mb-2">No Posts Found</h1>
+            <p className="text-slate-500">Follow more people to see their latest updates.</p>
+          </div>
         ) : (
           posts.map((item) => (
             <Post
@@ -80,10 +86,12 @@ const Home = () => {
       </div>
 
       {intialRender ? (
-        <Loader />
+        <div className="flex justify-center py-10">
+          <Loader />
+        </div>
       ) : (
-        <div ref={loderRef} className="text-center">
-          {flag ? "No New Post" : <Loader />}
+        <div ref={loderRef} className="text-center py-8">
+          {flag ? <span className="text-slate-500 text-sm font-medium tracking-wide uppercase">You're all caught up</span> : <Loader />}
         </div>
       )}
     </div>

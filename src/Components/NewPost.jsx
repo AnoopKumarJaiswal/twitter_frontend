@@ -15,10 +15,10 @@ const NewPost = ({ name }) => {
   const { showSidebar, setShowSidebar } = useUtilContext()
   const [showBtn, setShowBtn] = useState(true)
   const [postDetails, setPostDetails] = useState({
-    caption : "",
-    img : ""
+    caption: "",
+    img: ""
   })
-//   console.log(postDetails)
+  //   console.log(postDetails)
   const nav = useNavigate()
   const dispatch = useDispatch()
 
@@ -33,16 +33,16 @@ const NewPost = ({ name }) => {
       formData.append("upload_preset", import.meta.env.VITE_UPLOAD_PRESETS)
 
       axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME}/image/upload`, formData)
-      .then((res) => {
-        // console.log(res)
-        setPostDetails(prev => ({
-            ...prev, img : res.data.url
-        }))
-        setShowBtn(true)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+        .then((res) => {
+          // console.log(res)
+          setPostDetails(prev => ({
+            ...prev, img: res.data.url
+          }))
+          setShowBtn(true)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
 
 
     }
@@ -85,7 +85,7 @@ const NewPost = ({ name }) => {
         <textarea
           onChange={(e) => {
             setPostDetails(prev => ({
-                ...prev, caption : e.target.value
+              ...prev, caption: e.target.value
             }))
           }}
           placeholder="Write a caption..."
@@ -93,23 +93,22 @@ const NewPost = ({ name }) => {
         ></textarea>
 
         {showBtn && <button
-        onClick={() => {
-            if(!postDetails.img && !postDetails.caption)
-            {
-                toast.error("Please enter atleast one field")
-                return
+          onClick={() => {
+            if (!postDetails.img && !postDetails.caption) {
+              toast.error("Please enter atleast one field")
+              return
             }
-            axios.post(DOMAIN + "/posts", postDetails, {withCredentials : true})
-            .then((res) => {
+            axios.post(DOMAIN + "/posts", postDetails, { withCredentials: true })
+              .then((res) => {
                 // console.log(res)
                 dispatch(addPost(res.data.data))
                 nav("/profile")
-            })
-        }}
-        className="px-6 py-3 border border-gray-600 text-gray-800 rounded-xl
+              })
+          }}
+          className="px-6 py-3 border border-gray-600 text-gray-800 rounded-xl
                     hover:bg-gray-100 active:scale-95 transition-all duration-200"
         >
-        Add Post
+          Add Post
         </button>}
 
 

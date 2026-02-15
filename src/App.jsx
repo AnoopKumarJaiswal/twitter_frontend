@@ -13,6 +13,7 @@ import EditProfile from './Components/EditProfile'
 import NewPost from './Components/NewPost'
 import ViewProfile from './Components/ViewProfile'
 import Chat from './Components/Chat'
+import ChangePassword from './Components/ChangePassword'
 
 
 const App = () => {
@@ -41,6 +42,7 @@ const App = () => {
           <Route path='/post' element={<NewPost />} />
           <Route path='/profile/:id' element={<ViewProfile />} />
           <Route path='/chat/:id' element={<Chat />} />
+          <Route path='/changepassword' element = {<ChangePassword />} />
         </Route>
 
 

@@ -173,7 +173,7 @@ const Chat = () => {
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             type="text"
             placeholder="Type a message..."
-            className="flex-1 bg-[#f1f3f6] rounded-full px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 bg-[#f1f3f6] rounded-full px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-blue-600"
           />
           <button
             onClick={sendMessage}

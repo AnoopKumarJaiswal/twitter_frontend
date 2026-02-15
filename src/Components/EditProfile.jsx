@@ -33,17 +33,16 @@ const EditProfile = () => {
       fd.append("file", img)
       fd.append("upload_preset", import.meta.env.VITE_UPLOAD_PRESETS)
 
-      async function uploadToCloud()
-      {
+      async function uploadToCloud() {
         const res = await axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME}/image/upload`, fd)
         // console.log(res)
         setDetails(prev => ({
           ...prev,
-          profilePicture : res.data.url
+          profilePicture: res.data.url
         }))
       }
       uploadToCloud()
-  
+
 
 
     }
@@ -59,7 +58,7 @@ const EditProfile = () => {
       <div className="space-y-6">
 
 
-     
+
 
         {/* Profile Image */}
         <div className="flex justify-center">
@@ -86,7 +85,7 @@ const EditProfile = () => {
             onChange={(e) => {
               setDetails(prev => ({
                 ...prev,
-                firstName : e.target.value
+                firstName: e.target.value
               }))
             }}
             type="text"
@@ -104,7 +103,7 @@ const EditProfile = () => {
             onChange={(e) => {
               setDetails(prev => ({
                 ...prev,
-                lastName : e.target.value
+                lastName: e.target.value
               }))
             }}
             type="text"
@@ -123,7 +122,7 @@ const EditProfile = () => {
             onChange={(e) => {
               setDetails(prev => ({
                 ...prev,
-                bio : e.target.value
+                bio: e.target.value
               }))
             }}
             className="w-full p-3 rounded-xl border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500 transition resize-none"
@@ -136,12 +135,12 @@ const EditProfile = () => {
         <button
           type="button"
           onClick={() => {
-            axios.patch(DOMAIN + "/profile/edit", details, {withCredentials : true})
-            .then((data) => {
-              // console.log(data)
-              dispatch(addUser(data.data.data))
-              nav("/profile")
-            })
+            axios.patch(DOMAIN + "/profile/edit", details, { withCredentials: true })
+              .then((data) => {
+                // console.log(data)
+                dispatch(addUser(data.data.data))
+                nav("/profile")
+              })
           }}
           className="w-full bg-blue-600 text-white py-3 rounded-xl text-lg font-semibold hover:bg-blue-700 transition"
         >

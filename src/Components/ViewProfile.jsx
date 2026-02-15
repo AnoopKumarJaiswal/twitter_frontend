@@ -1,4 +1,4 @@
-import axios from "axios";
+        import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useUtilContext } from "../utils/UtilContext";
@@ -76,7 +76,7 @@ const ViewProfile = () => {
             />
 
             <div className="flex-1 flex flex-col">
-              <h3 className="text-2xl font-semibold text-gray-900">
+              <h3 className="text-2xl font-semibold text-white">
                 {firstName} {lastName}
               </h3>
               <p className="text-gray-500">@{username}</p>

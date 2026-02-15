@@ -15,56 +15,43 @@ const SideBar = () => {
       onMouseLeave={() => setShowSidebar(false)}
       onMouseEnter={() => setShowSidebar(true)}
       className={`
-        bg-blue-300 
+        bg-slate-900/60 backdrop-blur-xl border-r border-slate-800/50
         min-h-[90vh]
-        transition-all duration-300 
+        transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
         flex flex-col
         justify-between
-        py-6
-        fixed
-        ${showSidebar ? "w-[20vw] px-4" : "w-[5vw] items-center px-2"}
+        py-8
+        h-full
+        shadow-2xl shadow-blue-900/5
+        ${showSidebar ? "w-[20vw] px-6" : "w-[80px] items-center px-4"}
       `}
     >
       {/* TOP MENU */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-6 w-full">
         {/* HOME */}
-        <div className="flex items-center gap-3 text-white text-lg hover:text-blue-900 cursor-pointer transition-all">
-          <i className="fa-regular fa-house"></i>
-          {showSidebar && (
-            <Link
-              className="opacity-100 transition-opacity duration-300"
-              to="/home"
-            >
-              Home
-            </Link>
-          )}
-        </div>
+        <Link to="/home" className="flex items-center gap-4 text-slate-400 hover:text-blue-400 hover:bg-slate-800/50 hover:shadow-lg hover:shadow-blue-500/10 p-3.5 rounded-2xl cursor-pointer transition-all duration-300 group w-full overflow-hidden whitespace-nowrap">
+          <i className="fa-regular fa-house text-xl w-6 text-center group-hover:scale-110 transition-transform duration-300"></i>
+          <span className={`font-medium tracking-wide transition-opacity duration-300 ${showSidebar ? "opacity-100 delay-100" : "opacity-0 invisible w-0"}`}>
+            Home
+          </span>
+        </Link>
 
         {/* PROFILE */}
-        <div className="flex items-center gap-3 text-white text-lg hover:text-blue-900 cursor-pointer transition-all">
-          <i className="fa-solid fa-user"></i>
-          {showSidebar && (
-            <Link
-              className="opacity-100 transition-opacity duration-300"
-              to="/profile"
-            >
-              Profile
-            </Link>
-          )}
-        </div>
+        <Link to="/profile" className="flex items-center gap-4 text-slate-400 hover:text-purple-400 hover:bg-slate-800/50 hover:shadow-lg hover:shadow-purple-500/10 p-3.5 rounded-2xl cursor-pointer transition-all duration-300 group w-full overflow-hidden whitespace-nowrap">
+          <i className="fa-solid fa-user text-xl w-6 text-center group-hover:scale-110 transition-transform duration-300"></i>
+          <span className={`font-medium tracking-wide transition-opacity duration-300 ${showSidebar ? "opacity-100 delay-100" : "opacity-0 invisible w-0"}`}>
+            Profile
+          </span>
+        </Link>
+
 
         {/* ADD POST */}
-        <div className="flex items-center gap-3 text-white text-lg hover:text-blue-900 cursor-pointer transition-all mt-4">
-          <i className="fa-solid fa-plus"></i>
-          {showSidebar && (
-            <Link
-              className="opacity-100 transition-opacity duration-300"
-              to="/post"
-            >
-              Add Post
-            </Link>
-          )}
-        </div>
+        <Link to="/post" className="flex items-center gap-4 text-slate-400 hover:text-emerald-400 hover:bg-slate-800/50 hover:shadow-lg hover:shadow-emerald-500/10 p-3.5 rounded-2xl cursor-pointer transition-all duration-300 group w-full overflow-hidden whitespace-nowrap mt-4 border border-transparent hover:border-emerald-500/20">
+          <i className="fa-solid fa-plus text-xl w-6 text-center group-hover:rotate-90 transition-transform duration-300"></i>
+          <span className={`font-medium tracking-wide transition-opacity duration-300 ${showSidebar ? "opacity-100 delay-100" : "opacity-0 invisible w-0"}`}>
+            Add Post
+          </span>
+        </Link>
       </div>
 
       {/* LOGOUT */}
@@ -76,10 +63,12 @@ const SideBar = () => {
               dispatch(logoutUser())
             })
         }}
-        className="flex items-center gap-3 text-white text-lg hover:text-blue-900 cursor-pointer transition-all"
+        className="flex items-center gap-4 text-slate-400 hover:text-red-400 hover:bg-slate-800/50 hover:shadow-lg hover:shadow-red-500/10 p-3.5 rounded-2xl cursor-pointer transition-all duration-300 group w-full overflow-hidden whitespace-nowrap"
       >
-        <i className="fa-solid fa-power-off"></i>
-        {showSidebar && <div>Logout</div>}
+        <i className="fa-solid fa-power-off text-xl w-6 text-center group-hover:scale-110 transition-transform duration-300"></i>
+        <span className={`font-medium tracking-wide transition-opacity duration-300 ${showSidebar ? "opacity-100 delay-100" : "opacity-0 invisible w-0"}`}>
+          Logout
+        </span>
       </div>
     </div>
   )

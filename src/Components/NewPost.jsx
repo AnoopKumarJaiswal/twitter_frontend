@@ -50,12 +50,12 @@ const NewPost = ({ name }) => {
 
   return (
     <div className={
-      'bg-gray-100 flex justify-center items-start py-10 transition-all duration-300 ' +
-      (showSidebar ? "w-[80vw]" : "w-[95vw]")
+      'bg-gray-100 flex justify-center items-start py-4 md:py-10 transition-all duration-300 top-[10vh] ' +
+      (showSidebar ? "w-full md:w-[80vw]" : "w-full md:w-[95vw]")
     }>
 
       {/* CARD */}
-      <div className="bg-white shadow-lg rounded-xl p-6 w-[35vw] min-h-[50vh] flex flex-col gap-6">
+      <div className="bg-white shadow-lg rounded-xl p-4 md:p-6 w-[90vw] md:w-[35vw] min-h-[50vh] flex flex-col gap-4 md:gap-6 mt-16 md:mt-0 mb-20 md:mb-0">
 
         {/* IMAGE UPLOADER */}
         <div className="relative border-2 border-dashed border-gray-300 rounded-xl w-full h-[35vh] overflow-hidden flex items-center justify-center cursor-pointer hover:border-gray-400 transition">
@@ -105,7 +105,7 @@ const NewPost = ({ name }) => {
                 nav("/profile")
               })
           }}
-          className="px-6 py-3 border border-gray-600 text-gray-800 rounded-xl
+          className="w-full md:w-auto px-6 py-3 border border-gray-600 text-gray-800 rounded-xl
                     hover:bg-gray-100 active:scale-95 transition-all duration-200"
         >
           Add Post

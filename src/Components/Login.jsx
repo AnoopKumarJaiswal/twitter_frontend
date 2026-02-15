@@ -15,6 +15,8 @@ const Login = () => {
     password: "",
   });
 
+  const [show, setShow] = useState(false)
+
 
   function handleChange(e) {
     setFormData({
@@ -99,14 +101,17 @@ const Login = () => {
               <input
                 id="password"
                 name="password"
-                type="text" /* Keeping functionality identical as requested */
+                type={show ? "text" : "password"}
                 value={formData.password}
                 onChange={handleChange}
                 className="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 text-slate-100 focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 outline-none transition-all duration-300 placeholder-slate-600"
                 placeholder="Enter your password"
               />
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                <svg className="w-5 h-5 text-slate-500 group-focus-within:text-purple-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer text-slate-500 hover:text-purple-400 transition-colors">
+                {show ?
+                  <i className="fa-solid fa-eye-slash" onClick={() => setShow(false)}></i> :
+                  <i className="fa-solid fa-eye" onClick={() => setShow(true)}></i>
+                }
               </div>
             </div>
           </div>

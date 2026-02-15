@@ -99,7 +99,7 @@ const Post = ({
 
   return (
     <div className="animate-fade-in">
-      <div className="glass-card w-full max-w-xl mx-auto rounded-3xl p-6 mb-8 relative hover:border-slate-600/50 transition-all duration-300 group">
+      <div className="glass-card w-full max-w-xl mx-auto rounded-3xl p-4 md:p-6 mb-8 relative hover:border-slate-600/50 transition-all duration-300 group">
 
         {/* MODAL */}
         {showModal && (
@@ -112,27 +112,27 @@ const Post = ({
             </span>
 
             <div
-              className={`bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden h-[85vh] max-w-[1000px] flex shadow-2xl shadow-blue-900/20 ${img ? "w-[85vw]" : "w-[500px]"
+              className={`bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden h-[85vh] max-w-[1000px] flex flex-col md:flex-row shadow-2xl shadow-blue-900/20 ${img ? "w-[95vw] md:w-[85vw]" : "w-[95vw] md:w-[500px]"
                 }`}
             >
               {img && (
-                <div className="w-[65%] bg-black flex items-center justify-center">
+                <div className="w-full md:w-[65%] h-[40%] md:h-full bg-black flex items-center justify-center relative">
                   <img src={img} className="max-w-full max-h-full object-contain" />
                 </div>
               )}
 
-              <div className={`${img ? "w-[35%]" : "w-full"} flex flex-col border-l border-slate-800`}>
-                <div className="flex items-center gap-3 px-4 py-4 border-b border-slate-800">
-                  <img className="h-10 w-10 rounded-full object-cover ring-2 ring-slate-700" src={profilePicture} />
-                  <p className="font-semibold text-slate-200">@{username}</p>
+              <div className={`${img ? "w-full md:w-[35%] h-[60%] md:h-full" : "w-full h-full"} flex flex-col border-t md:border-t-0 md:border-l border-slate-800`}>
+                <div className="flex items-center gap-3 px-4 py-3 md:py-4 border-b border-slate-800 shrink-0">
+                  <img className="h-8 w-8 md:h-10 md:w-10 rounded-full object-cover ring-2 ring-slate-700" src={profilePicture} />
+                  <p className="font-semibold text-slate-200 text-sm md:text-base">@{username}</p>
                 </div>
 
-                <div className="px-5 py-4 text-sm text-slate-300 leading-relaxed border-b border-slate-800/50">
+                <div className="px-5 py-3 md:py-4 text-sm text-slate-300 leading-relaxed border-b border-slate-800/50 shrink-0 max-h-[100px] overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700">
                   {caption}
                 </div>
 
                 {/* COMMENTS */}
-                <div className="flex-1 flex flex-col min-h-0">
+                <div className="flex-1 flex flex-col min-h-0 bg-slate-900/50">
                   <div className="flex-1 overflow-y-auto px-4 py-3 space-y-4 text-sm scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
                     {commentList.map((item) => {
                       if (!item || !item.author) return null;
@@ -141,11 +141,11 @@ const Post = ({
                         <div key={item._id} className="flex items-start gap-3 group/comment">
                           <img
                             src={item.author?.profilePicture}
-                            className="h-8 w-8 rounded-full object-cover ring-1 ring-slate-700"
+                            className="h-8 w-8 rounded-full object-cover ring-1 ring-slate-700 shrink-0"
                           />
                           <div className="bg-slate-800/50 rounded-2xl px-3 py-2">
                             <p className="text-slate-100">
-                              <span className="font-semibold text-blue-400 mr-2">
+                              <span className="font-semibold text-blue-400 mr-2 block text-xs">
                                 @{item.author?.username}
                               </span>
                               {item.text}
@@ -157,21 +157,21 @@ const Post = ({
                   </div>
 
                   {/* ADD COMMENT */}
-                  <div className="px-4 py-4 border-t border-slate-800 flex items-center gap-3 bg-slate-900/50">
+                  <div className="px-3 md:px-4 py-3 md:py-4 border-t border-slate-800 flex items-center gap-2 md:gap-3 bg-slate-900 shrink-0">
                     <input
                       value={text}
                       onChange={(e) => setText(e.target.value)}
                       placeholder="Add a comment..."
-                      className="flex-1 bg-slate-800 border border-slate-700 rounded-full px-4 py-2.5 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                      className="flex-1 bg-slate-800 border border-slate-700 rounded-full px-4 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
                     />
-                    <button onClick={handleComment} className="text-blue-400 font-semibold hover:text-blue-300 transition-colors px-2">
+                    <button onClick={handleComment} className="text-blue-400 font-semibold hover:text-blue-300 transition-colors px-2 text-sm md:text-base">
                       Post
                     </button>
                   </div>
                 </div>
 
                 {/* LIKE SECTION IN MODAL */}
-                <div className="px-4 py-3 flex items-center gap-4 text-slate-400 border-t border-slate-800 bg-slate-900/30">
+                <div className="px-4 py-3 flex items-center gap-4 text-slate-400 border-t border-slate-800 bg-slate-900/30 shrink-0">
                   {userHasLiked ? (
                     <i
                       className="fa-solid fa-heart text-pink-500 text-xl cursor-pointer hover:scale-110 transition-transform"
@@ -183,7 +183,7 @@ const Post = ({
                       onClick={handleLike}
                     ></i>
                   )}
-                  <span className="font-medium">{likedByUser.length} likes</span>
+                  <span className="font-medium text-sm">{likedByUser.length} likes</span>
                 </div>
               </div>
             </div>

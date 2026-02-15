@@ -50,20 +50,20 @@ const Profile = () => {
 
           <p className="text-slate-300 text-lg mb-6 max-w-lg leading-relaxed">{bio || "No bio available"}</p>
 
-          <div className="flex gap-8 mb-8 bg-slate-800/50 p-4 rounded-2xl border border-slate-700/50">
-            <div className="flex flex-col items-center px-4">
-              <span className="text-2xl font-bold text-white">{post.length}</span>
-              <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Posts</span>
+          <div className="flex flex-wrap md:flex-nowrap justify-around md:justify-start gap-4 md:gap-8 mb-8 bg-slate-800/50 p-4 rounded-2xl border border-slate-700/50 w-full md:w-auto">
+            <div className="flex flex-col items-center px-2 md:px-4">
+              <span className="text-xl md:text-2xl font-bold text-white">{post.length}</span>
+              <span className="text-[10px] md:text-xs text-slate-400 uppercase tracking-wider font-semibold">Posts</span>
             </div>
-            <div className="w-px bg-slate-700/50"></div>
-            <div className="flex flex-col items-center px-4">
-              <span className="text-2xl font-bold text-white">{followers.length}</span>
-              <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Followers</span>
+            <div className="hidden md:block w-px bg-slate-700/50"></div>
+            <div className="flex flex-col items-center px-2 md:px-4">
+              <span className="text-xl md:text-2xl font-bold text-white">{followers.length}</span>
+              <span className="text-[10px] md:text-xs text-slate-400 uppercase tracking-wider font-semibold">Followers</span>
             </div>
-            <div className="w-px bg-slate-700/50"></div>
-            <div className="flex flex-col items-center px-4">
-              <span className="text-2xl font-bold text-white">{following.length}</span>
-              <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Following</span>
+            <div className="hidden md:block w-px bg-slate-700/50"></div>
+            <div className="flex flex-col items-center px-2 md:px-4">
+              <span className="text-xl md:text-2xl font-bold text-white">{following.length}</span>
+              <span className="text-[10px] md:text-xs text-slate-400 uppercase tracking-wider font-semibold">Following</span>
             </div>
           </div>
 
@@ -75,10 +75,10 @@ const Profile = () => {
               Edit Profile
             </button>
             <button
-            onClick={() =>{
-              nav("/changepassword")
-            }}
-            className="flex-1 md:flex-none px-6 py-2.5 bg-slate-800 text-slate-300 border border-slate-700 rounded-xl font-semibold hover:bg-slate-700 hover:text-white transition-all duration-300">
+              onClick={() => {
+                nav("/changepassword")
+              }}
+              className="flex-1 md:flex-none px-6 py-2.5 bg-slate-800 text-slate-300 border border-slate-700 rounded-xl font-semibold hover:bg-slate-700 hover:text-white transition-all duration-300">
               Change Password
             </button>
           </div>

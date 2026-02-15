@@ -7,6 +7,7 @@ import Navbar from './Navbar'
 import SideBar from './SideBar'
 import axios from 'axios'
 import DOMAIN from '../constants'
+import Loader from './Loder'
 
 const ProtectedRoutes = () => {
     const userData = useSelector(store => store.user)
@@ -16,7 +17,7 @@ const ProtectedRoutes = () => {
     }, [])
 
     if (userData.loading) {
-        return <h1 className='bg-red-600'>Loading...</h1>
+        return <Loader />
     }
 
     return userData.data ? (
